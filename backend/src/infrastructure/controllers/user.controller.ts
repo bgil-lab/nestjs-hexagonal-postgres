@@ -9,11 +9,19 @@ import { UserResponseDto } from '../dtos/user-response.dto';
 @ApiTags('Users')
 @Controller('users')
 export class UserController {
+  /**
+   * Inyección de casos de uso siguiendo arquitectura limpia.
+   * El controlador solo orquesta la entrada/salida, sin lógica de negocio.
+   */
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly getUserUseCase: GetUserUseCase
   ) {}
 
+  /**
+   * Endpoint para crear un usuario.
+   * Recibe un DTO validado y delega la creación al caso de uso.
+   */
   @Post()
   @ApiOperation({ summary: 'Crear usuario' })
   @ApiCreatedResponse({ type: ApiResponse<UserResponseDto> })
@@ -32,6 +40,10 @@ export class UserController {
     };
   }
 
+  /**
+  * Endpoint para obtener un usuario por su ID.
+  * Si el usuario no existe, el caso de uso debería lanzar una excepción.
+  */
   @Get(':id')
   @ApiOperation({ summary: 'Obtener usuario por ID' })
   @ApiOkResponse({ type: ApiResponse<UserResponseDto> })

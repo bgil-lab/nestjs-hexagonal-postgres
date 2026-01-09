@@ -7,11 +7,22 @@ import { Email } from '../../domain/value-objects/email.vo';
 import { UserAlreadyExistsException } from'../../domain/exceptions/useralreadyexists.exception'
 
 export class CreateUserUseCase {
+  /**
+   * Inyección del repositorio mediante token para mantener
+   * el desacoplamiento entre dominio e infraestructura.
+   */
   constructor(
     @Inject(USER_REPOSITORY)
     private readonly userRepository: UserRepository
   ) {}
 
+  /**
+   * Ejecuta el caso de uso de creación de usuario.
+   *
+   * @param email Email en formato string que será convertido a Value Object
+   * @returns La entidad User recién creada
+   * @throws UserAlreadyExistsException Si ya existe un usuario con ese email
+   */
   async execute(email: string): Promise<User> {
 
     const user = new User(
