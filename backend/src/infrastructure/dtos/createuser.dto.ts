@@ -12,4 +12,8 @@ export class CreateUserDto {
     message: 'El email debe ser corporativo (@empresa.com)'
   })
   email: string;
+
+  @ApiProperty({ example: 'TestPass' })
+  password: string;
+
 }

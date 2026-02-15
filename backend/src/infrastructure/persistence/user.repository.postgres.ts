@@ -34,7 +34,8 @@ export class PostgresUserRepository implements UserRepository {
     await this.repo.save({
       id: user.id,
       email: user.email.getValue(),
-      active: user.active
+      active: user.active,
+      password:user.passwordHash
     });
   }
 
@@ -50,7 +51,8 @@ export class PostgresUserRepository implements UserRepository {
     return new User(
       entity.id,
       Email.create(entity.email),
-      entity.active
+      entity.active,
+      entity.password
     );
   }
 
@@ -64,6 +66,6 @@ export class PostgresUserRepository implements UserRepository {
     const user = await this.repo.findOne({
       where: { email: email.getValue() }
     });
-    return user ? new User(user.id, Email.create(user.email)) : null;
+    return user ? new User(user.id, Email.create(user.email),user.active,user.password) : null;
   }
 }

@@ -1,4 +1,6 @@
 import { Email } from '../value-objects/email.vo';
+import { PasswordHasher } from '../services/password-hasher';
+import{ PasswordNotSetException } from '../../domain/exceptions/password-not-set.exception';
 
 /**
  * Entidad de dominio que representa un usuario dentro del sistema.
@@ -20,6 +22,19 @@ export class User {
   constructor(
     public readonly id: string,
     public readonly email: Email,
-    public readonly active: boolean = true
+    public readonly active: boolean = true,
+    public readonly passwordHash: string,
   ) {}
+
+   async validatePassword(
+    plainPassword: string,
+    hasher: PasswordHasher,
+  ): Promise<boolean> {
+      
+    if (!this.passwordHash) {
+      throw new PasswordNotSetException();
+    }
+
+    return hasher.compare(plainPassword, this.passwordHash);
+  }
 }

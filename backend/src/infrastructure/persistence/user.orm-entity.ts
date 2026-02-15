@@ -32,4 +32,11 @@ export class UserOrmEntity {
    */ 
   @Column()
   active: boolean;
+
+   /**
+   * Contraseña 
+   * Representa la contraseña asociada al usuario.
+   */ 
+  @Column()
+  password: string;
 }

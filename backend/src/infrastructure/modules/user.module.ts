@@ -5,8 +5,8 @@ import { UserController } from '../controllers/user.controller';
 import { UserOrmEntity } from '../persistence/user.orm-entity';
 import { PostgresUserRepository } from '../persistence/user.repository.postgres';
 
-import { CreateUserUseCase } from '../../application/use-cases/create-user.usecase';
-import { GetUserUseCase } from '../../application/use-cases/get-user.usecase';
+import { CreateUserUseCase } from '../../application/use-cases/create-user/create-user.usecase';
+import { GetUserUseCase } from '../../application/use-cases/get-user/get-user.usecase';
 import { USER_REPOSITORY } from '../../domain/repositories/user.repository.token';
 
 /**

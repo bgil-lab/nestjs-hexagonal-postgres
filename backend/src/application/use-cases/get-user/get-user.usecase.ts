@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
-import type { UserRepository } from '../../domain/repositories/user.repository';
-import { USER_REPOSITORY } from '../../domain/repositories/user.repository.token';
-import { User } from '../../domain/entities/user.entity';
- import { UserNotFoundException } from '../../domain/exceptions/user-not-found.exception';
+import type { UserRepository } from '../../../domain/repositories/user.repository';
+import { USER_REPOSITORY } from '../../../domain/repositories/user.repository.token';
+import { User } from '../../../domain/entities/user.entity';
+ import { UserNotFoundException } from '../../../domain/exceptions/user-not-found.exception';
 
  /**
  * Caso de uso encargado de obtener un usuario por su ID.

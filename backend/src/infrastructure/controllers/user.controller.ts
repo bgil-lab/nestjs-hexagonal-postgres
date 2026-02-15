@@ -1,7 +1,7 @@
 import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { ApiTags,  ApiOperation,  ApiCreatedResponse,  ApiOkResponse} from '@nestjs/swagger';
-import { CreateUserUseCase } from '../../application/use-cases/create-user.usecase';
-import { GetUserUseCase } from '../../application/use-cases/get-user.usecase';
+import { CreateUserUseCase } from '../../application/use-cases/create-user/create-user.usecase';
+import { GetUserUseCase } from '../../application/use-cases/get-user/get-user.usecase';
 import { CreateUserDto } from '../dtos/createuser.dto'
 import { ApiResponse } from '../dtos/utilities/api-response.dto'
 import { UserResponseDto } from '../dtos/user-response.dto';
@@ -29,7 +29,7 @@ export class UserController {
     @Body() dto: CreateUserDto
   ): Promise<ApiResponse<UserResponseDto>> {
 
-    const user = await this.createUserUseCase.execute(dto.email);
+    const user = await this.createUserUseCase.execute(dto.email, dto.password);
 
     return {
       status: 'success',
